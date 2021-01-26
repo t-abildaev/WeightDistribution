@@ -51,28 +51,28 @@ int main()
 	char temp_char = 0;
 	std::array <int, N> temp_array;
 	std::vector <std::array <int, N>> A;
-	std::ifstream file;
-	file.open("data.txt");
-	while (file >> temp_char)
+	std::ifstream input;
+	input.open("data.txt");
+	while (input >> temp_char)
 	{
 		temp_array[0] = temp_char == '1';
 		for (int j = 1; j < N; ++j)
 		{
-			file >> temp_char;
+			input >> temp_char;
 			temp_array[j] = temp_char == '1';
 		}
 		A.push_back(temp_array);
 		++K;
 	}	
-	file.close();
+	input.close();
 
-	for (int i = 0; i < K; ++i)
-	{
-		for (int j = 0; j < N; ++j)
-			std::cout << A[i][j];
-		std::cout << std::endl;
-	}
-	std::cout << K << std::endl << std::endl;
+	//for (int i = 0; i < K; ++i)
+	//{
+	//	for (int j = 0; j < N; ++j)
+	//		std::cout << A[i][j];
+	//	std::cout << std::endl;
+	//}
+	//std::cout << K << std::endl << std::endl;
 
 	int k = 0;
 	int rank = 0;
@@ -93,13 +93,13 @@ int main()
 	A.resize(K = rank);
 	std::vector <std::array <int, N>> (A).swap(A);
 
-	for (int i = 0; i < K; ++i)
-	{
-		for (int j = 0; j < N; ++j)
-			std::cout << A[i][j];
-		std::cout << std::endl;
-	}
-	std::cout << A.capacity() << std::endl << std::endl;
+	//for (int i = 0; i < K; ++i)
+	//{
+	//	for (int j = 0; j < N; ++j)
+	//		std::cout << A[i][j];
+	//	std::cout << std::endl;
+	//}
+	//std::cout << A.capacity() << std::endl << std::endl;
 
 	std::array <int, N + 1> distribution{};
 	distribution[0] = 1;
@@ -125,6 +125,12 @@ int main()
 	//calculate(std::ref(distribution), A, 1, M - 1);
 	//end_time = std::chrono::high_resolution_clock::now();
 	//std::cout << std::endl << std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count() << std::endl;
+
+	std::ofstream output;
+	output.open("weights.txt");
+	for (int i = 0; i < N + 1; ++i)
+		output << i << '\t' << distribution[i] << '\n';
+	output.close();
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
