@@ -66,13 +66,13 @@ int main()
 	}	
 	input.close();
 
-	//for (int i = 0; i < K; ++i)
-	//{
-	//	for (int j = 0; j < N; ++j)
-	//		std::cout << A[i][j];
-	//	std::cout << std::endl;
-	//}
-	//std::cout << K << std::endl << std::endl;
+	for (int i = 0; i < K; ++i)
+	{
+		for (int j = 0; j < N; ++j)
+			std::cout << A[i][j];
+		std::cout << std::endl;
+	}
+	std::cout << K << std::endl << std::endl;
 
 	int k = 0;
 	int rank = 0;
@@ -85,7 +85,7 @@ int main()
 			if (rank != k) std::swap(A[rank], A[k]);
 			for (int i = rank + 1; i < K; ++i)
 				if (A[i][j])
-					for (int l = 0; l < N; ++l)
+					for (int l = j; l < N; ++l)
 						A[i][l] = !(A[i][l] == A[rank][l]);
 			++rank;
 		}
@@ -93,13 +93,13 @@ int main()
 	A.resize(K = rank);
 	std::vector <std::array <int, N>> (A).swap(A);
 
-	//for (int i = 0; i < K; ++i)
-	//{
-	//	for (int j = 0; j < N; ++j)
-	//		std::cout << A[i][j];
-	//	std::cout << std::endl;
-	//}
-	//std::cout << A.capacity() << std::endl << std::endl;
+	for (int i = 0; i < K; ++i)
+	{
+		for (int j = 0; j < N; ++j)
+			std::cout << A[i][j];
+		std::cout << std::endl;
+	}
+	std::cout << A.capacity() << std::endl << std::endl;
 
 	std::array <int, N + 1> distribution{};
 	distribution[0] = 1;
